@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SqlDataReader.Injectable.Mocks\CraveInjectables.SqlDataService.Mocks.csproj" />
-    <ProjectReference Include="..\SqlDataReader.Injectable\CraveInjectables.SqlDataService.csproj" />
+    <ProjectReference Include="..\CraveInjectables.SqlDataService.Mocks\CraveInjectables.SqlDataService.Mocks.csproj" />
+    <ProjectReference Include="..\CraveInjectables.SqlDataService\CraveInjectables.SqlDataService.csproj" />
   </ItemGroup>
 
 </Project>

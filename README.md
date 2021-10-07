@@ -63,34 +63,34 @@ I won't be covering dependency injection solutions for older and newer version o
 ```csharp
 // The ISqlDataService via dependency injection...
 ISqlDataService DataReaderService = new SqlDataService("Server=(localdb)\\ProjectsV13;Database=MyDatabase;Trusted_Connection=True;");
-
 /*...*/
-protected void SampleMethod() {
-  // Refactored previous code to use our SqlDataService as a wrapper to the SqlCommand and SqlDataReader.
-  DataReaderService.ExecuteSqlReader("SELECT TOP 1 * FROM [People] WHERE [Status] = @StatusId", new[] { new SqlParameter("@Id", 1) }, (reader) =>
-  {
-    var rows = 0;
-    while (reader.Read())
-    {
-      /* .... 
-      * Incredibly complex business logic that uses retrieved DB results that we wish to test...
-      * ...*/
-      rows++;
-      if (rows > 1)
-      {
-        // Throw an exception!
-      }
-      var status = Convert.ToInt32(reader["Status"]);
 
-      if(status == 3)
-      {
-        // Do something special for status 3.
-      }
-    }
-  });
+protected void SampleMethod()
+{
+    // Refactored previous code to use our SqlDataService as a wrapper to the SqlCommand and SqlDataReader.
+    DataReaderService.ExecuteSqlReader("SELECT TOP 1 * FROM [People] WHERE [Status] = @StatusId", new[] { new SqlParameter("@Id", 1) }, (reader) =>
+    {
+        var rows = 0;
+        while (reader.Read())
+        {
+            /* .... 
+            * Incredibly complex business logic that uses retrieved DB results that we wish to test...
+            * ...*/
+            rows++;
+            if (rows > 1)
+            {
+                // Throw an exception!
+            }
+            var status = Convert.ToInt32(reader["Status"]);
+
+            if (status == 3)
+            {
+                // Do something special for status 3.
+            }
+        }
+    });
 }
 /*...*/
-
 ```
 
 ## Example Moq

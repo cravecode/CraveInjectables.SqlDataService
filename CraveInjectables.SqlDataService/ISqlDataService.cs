@@ -7,10 +7,10 @@ namespace CraveInjectables.SqlDataService
 {
     public interface ISqlDataService
     {
-        bool ExecuteNonQuery(string sql, IList<SqlParameter> parameters, Func<int, bool> callback);
+        void ExecuteNonQuery(string sql, IList<SqlParameter> parameters, Action<int> callback);
 
-        bool ExecuteScalar(string sql, IList<SqlParameter> parameters, Func<object, bool> callback);
+        void ExecuteScalar(string sql, IList<SqlParameter> parameters, Action<object> callback);
 
-        bool ExecuteSqlReader(string sql, IList<SqlParameter> parameters, Func<IDataReader, bool> callback);
+        void ExecuteSqlReader(string sql, IList<SqlParameter> parameters, Action<IDataReader> callback);
     }
 }

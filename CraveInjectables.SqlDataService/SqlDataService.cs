@@ -43,7 +43,7 @@ namespace CraveInjectables.SqlDataService
             return new SqlConnection(sqlConnectionString);
         }
 
-        protected bool ExecuteSqlCommand<TResult>(string sql, IList<SqlParameter> parameters, Expression<Func<SqlCommand, TResult>> expression, Func<TResult, bool> action)
+        protected void ExecuteSqlCommand<TResult>(string sql, IList<SqlParameter> parameters, Expression<Func<SqlCommand, TResult>> expression, Action<TResult> action)
         {
             using (var conn = _CreateConnection())
             {
@@ -67,8 +67,7 @@ namespace CraveInjectables.SqlDataService
                         // If not IDisposable, will be null.
                         disposable = invokedResult as IDisposable;
 
-                        return (action?.Invoke(invokedResult))
-                            .GetValueOrDefault();
+                        action?.Invoke(invokedResult);
                     }
                     finally
                     {
@@ -78,27 +77,27 @@ namespace CraveInjectables.SqlDataService
             }
         }
 
-        public bool ExecuteNonQuery(string sql, IList<SqlParameter> parameters, Func<int, bool> callback)
+        public void ExecuteNonQuery(string sql, IList<SqlParameter> parameters, Action<int> callback)
         {
-            return ExecuteSqlCommand(
+            ExecuteSqlCommand(
                 sql,
                 parameters,
                 cmd => cmd.ExecuteNonQuery(),
                 callback);
         }
 
-        public bool ExecuteScalar(string sql, IList<SqlParameter> parameters, Func<object, bool> callback)
+        public void ExecuteScalar(string sql, IList<SqlParameter> parameters, Action<object> callback)
         {
-            return ExecuteSqlCommand(
+            ExecuteSqlCommand(
                 sql,
                 parameters,
                 cmd => cmd.ExecuteScalar(),
                 callback);
         }
 
-        public bool ExecuteSqlReader(string sql, IList<SqlParameter> parameters, Func<IDataReader, bool> callback)
+        public void ExecuteSqlReader(string sql, IList<SqlParameter> parameters, Action<IDataReader> callback)
         {
-            return ExecuteSqlCommand(
+            ExecuteSqlCommand(
                 sql,
                 parameters,
                 cmd => cmd.ExecuteReader(),

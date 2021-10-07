@@ -14,9 +14,9 @@ namespace CraveInjectables.SqlDataService.Mocks.Tests.Utilities
             sqlService.ExecuteSqlReader(
                 Arg.Is(matchPattern),
                 Arg.Is(paramsMatch),
-                Arg.Do<Func<IDataReader, bool>>(x =>
+                Arg.Do<Action<IDataReader>>(x =>
                 {
-                    var result = x.Invoke(dataReaderMock);
+                    x.Invoke(dataReaderMock);
                     dataReaderMock.Enumerator.Reset();
                     callback(dataReaderMock);
                 }));

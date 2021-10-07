@@ -15,17 +15,15 @@ namespace CraveInjectables.SqlDataService.Mocks.Tests.Utilities
                 x => x.ExecuteSqlReader(
                     It.Is(matchPattern),
                     It.Is(paramsMatch),
-                    It.IsAny<Func<IDataReader, bool>>())
-                ).Returns((string sql, IList<SqlParameter> parameters, Func<IDataReader, bool> sourceCallback) =>
+                    It.IsAny<Action<IDataReader>>())
+                ).Callback((string sql, IList<SqlParameter> parameters, Action<IDataReader> sourceCallback) =>
                 {
                     // Call the underlying code's provided callback first so that the whole function can execute.
-                    var results = sourceCallback(dataReaderMock);
+                    sourceCallback(dataReaderMock);
 
                     // Then call our evaluation on the reader to verify the data returned.
                     dataReaderMock.Enumerator.Reset();
                     callback(dataReaderMock);
-
-                    return results;
                 });
         }
     }

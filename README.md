@@ -24,8 +24,12 @@ High level documentation topics:
 * Showing how code can be improved by adding the ISqlDataService as a wrapper instead if tightly coupled to the SqlCommand class.
 * Example of problematic/untestable code that is tightly coupled to the SqlCommand class.
 
-### Example XUnit test using Moq
-We'll create a XUnit test using the `SampleService` and `SampleMethod` that is now much more testable with our wrapper around the use of the SqlCommand class.
+### Example XUnit test using CraveInjectables SqlDataService and Moq
+We'll create a XUnit test using the `SampleService` and `SampleMethod` that is now much more testable with our wrapper that allows us to get in between the use of our business logic and the `SqlCommand` class.
+
+CraveInjectables SqlDataService nuget package also comes with a IDataReader mocking helper. 
+We'll use this to mock our own results from a query provided as an array of anonymous class.
+
 ```csharp
 [Fact]
 public void MockedReaderValuesTest()

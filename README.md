@@ -1,6 +1,6 @@
 # CraveInjectables SqlDataService
 This Nuget package was inspired by the need to test legacy code that heavily used `ExecuteNonQuery`, `ExecuteScalar`, and `ExecuteReader` from the SqlCommand class. 
-I needed to be able to test logic downstream of the ExecutreReader results, without being dependent on a database. 
+I needed to be able to test logic downstream of the `ExecuteReader` results, without being dependent on a database. 
 I was able to turn the tightly coupled dependency on the SqlCommand class into a beneficial monitoring point by switching to this wrapper.
 
 ### Key objectives
@@ -95,7 +95,7 @@ protected void SampleMethod()
 ```
 
 ## Example Moq
-
+TBA
 
 
 

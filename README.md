@@ -32,7 +32,6 @@ protected void SampleMethod()
         connection.Open();
 
         var rows = 0;
-
         using (var reader = command.ExecuteReader())
         {
             while (reader.Read())

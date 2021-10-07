@@ -22,37 +22,37 @@ Let's say you have business logic that is tightly coupled with your connection s
 There is no way for us to get in between the business logic and data access for controlled tests.
 ```csharp
 protected void SampleMethod() {
-	using (var connection = new SqlConnection("Server=(localdb)\\ProjectsV13;Database=MyDatabase;Trusted_Connection=True;"))
-	using (var command = new SqlCommand(
-		"SELECT [Id], [FirstName], [LastName], [Status], [Created] FROM [People] WHERE [Id] = @Id",
-		connection))
-	{
-		command.Parameters.Add(new SqlParameter("@Id", 1));
-		connection.Open();
-
-		var rows = 0;
-
-		using (var reader = command.ExecuteReader())
-		{
-			while (reader.Read())
-			{
-				/* .... 
-				* Incredibly complex business logic that uses retrieved DB results that we wish to test...
-				* ...*/
-				rows++;
-				if (rows > 1)
-				{
-					// Throw an exception!
-				}
-				var status = Convert.ToInt32(reader["Status"]);
-
-				if(status == 3)
-				{
-					// Do something special for status 3.
-				}
-			}
-		}
-	}
+  using (var connection = new SqlConnection("Server=(localdb)\\ProjectsV13;Database=MyDatabase;Trusted_Connection=True;"))
+  using (var command = new SqlCommand(
+    "SELECT [Id], [FirstName], [LastName], [Status], [Created] FROM [People] WHERE [Id] = @Id",
+    connection))
+  {
+    command.Parameters.Add(new SqlParameter("@Id", 1));
+    connection.Open();
+  
+    var rows = 0;
+  
+    using (var reader = command.ExecuteReader())
+    {
+      while (reader.Read())
+      {
+        /* .... 
+        * Incredibly complex business logic that uses retrieved DB results that we wish to test...
+        * ...*/
+        rows++;
+        if (rows > 1)
+        {
+          // Throw an exception!
+        }
+        var status = Convert.ToInt32(reader["Status"]);
+  
+        if(status == 3)
+        {
+          // Do something special for status 3.
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -66,28 +66,28 @@ ISqlDataService DataReaderService = new SqlDataService("Server=(localdb)\\Projec
 
 /*...*/
 protected void SampleMethod() {
-	// Refactored previous code to use our SqlDataService as a wrapper to the SqlCommand and SqlDataReader.
-	DataReaderService.ExecuteSqlReader("SELECT TOP 1 * FROM [People] WHERE [Status] = @StatusId", new[] { new SqlParameter("@Id", 1) }, (reader) =>
-	{
-		var rows = 0;
-		while (reader.Read())
-		{
-			/* .... 
-			* Incredibly complex business logic that uses retrieved DB results that we wish to test...
-			* ...*/
-			rows++;
-			if (rows > 1)
-			{
-				// Throw an exception!
-			}
-			var status = Convert.ToInt32(reader["Status"]);
+  // Refactored previous code to use our SqlDataService as a wrapper to the SqlCommand and SqlDataReader.
+  DataReaderService.ExecuteSqlReader("SELECT TOP 1 * FROM [People] WHERE [Status] = @StatusId", new[] { new SqlParameter("@Id", 1) }, (reader) =>
+  {
+    var rows = 0;
+    while (reader.Read())
+    {
+      /* .... 
+      * Incredibly complex business logic that uses retrieved DB results that we wish to test...
+      * ...*/
+      rows++;
+      if (rows > 1)
+      {
+        // Throw an exception!
+      }
+      var status = Convert.ToInt32(reader["Status"]);
 
-			if(status == 3)
-			{
-				// Do something special for status 3.
-			}
-		}
-	});
+      if(status == 3)
+      {
+        // Do something special for status 3.
+      }
+    }
+  });
 }
 /*...*/
 

@@ -6,7 +6,7 @@ I was able to turn the tightly coupled dependency on the SqlCommand class into a
 ### Key objectives
 * Minimal code changes to implement tests in code that is heavily coupled to the database.
 * Simulate database response values to test downstream code.
-* Audit/test `select`, `insert`, `update, and `delete` SQL generated from large code blocks that would normally not be testable without significant refactoring.
+* Audit/test `select`, `insert`, `update`, and `delete` SQL generated from large code blocks that would normally not be testable without significant refactoring.
 
 
 ## Key Componenets

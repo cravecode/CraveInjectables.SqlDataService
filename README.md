@@ -23,8 +23,8 @@ There is no way for us to get in between the business logic and data access for 
 ```C#
 using (var connection = new SqlConnection("Server=(localdb)\\ProjectsV13;Database=MyDatabase;Trusted_Connection=True;"))
 using (var command = new SqlCommand(
-		"SELECT [Id], [FirstName], [LastName], [Status], [Created] FROM [People] WHERE [Id] = @Id",
-		connection))
+	"SELECT [Id], [FirstName], [LastName], [Status], [Created] FROM [People] WHERE [Id] = @Id",
+	connection))
 {
 	command.Parameters.Add(new SqlParameter("@Id", 1));
 	connection.Open();

@@ -19,7 +19,7 @@ There are two main components to this nuget library.
 Instead of writing in the order of: poor/untestable, improved code, the test. I have written these examples in reverse order. 
 I'm doing this because most people want to be able to see the actual usage at the top, from a quick skim ;) Or at least I do.
 
-High level documentation topics:
+#### High level documentation topics:
 * Demonstrate testing code using a mocked SqlDataReader
 * Showing how code can be improved by adding the ISqlDataService as a wrapper instead if tightly coupled to the SqlCommand class.
 * Example of problematic/untestable code that is tightly coupled to the SqlCommand class.

@@ -1,5 +1,4 @@
 ﻿using Crave.Injectable.SqlData.Mocks.Tests.TestHarness;
-using CraveInjectables.SqlDataService.Mocks.Tests.Utilities;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -30,7 +29,6 @@ namespace CraveInjectables.SqlDataService.Mocks.Tests
                     x.Invoke(mockedReader);
                 }));
 
-
             var errorMsg = string.Empty;
 
             try
@@ -40,7 +38,6 @@ namespace CraveInjectables.SqlDataService.Mocks.Tests
             catch (Exception ex)
             {
                 errorMsg = ex.Message;
-
             }
             Assert.Contains("more than 1", errorMsg);
         }

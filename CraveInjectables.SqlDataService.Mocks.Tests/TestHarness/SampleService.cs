@@ -6,7 +6,6 @@ namespace Crave.Injectable.SqlData.Mocks.Tests.TestHarness
 {
     public class SampleService
     {
-
         private ISqlDataService _SqlDataService;
 
         public SampleService(ISqlDataService dataService)
@@ -22,7 +21,7 @@ namespace Crave.Injectable.SqlData.Mocks.Tests.TestHarness
                 var rows = 0;
                 while (reader.Read())
                 {
-                    /* .... 
+                    /* ....
                     * Incredibly complex business logic that uses retrieved DB results that we wish to test...
                     * ...*/
                     rows++;
@@ -39,6 +38,7 @@ namespace Crave.Injectable.SqlData.Mocks.Tests.TestHarness
                 }
             });
         }
+
         /*...*/
     }
 }

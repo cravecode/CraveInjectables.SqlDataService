@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Brian Young @Cravecode</Authors>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression></PackageLicenseExpression>
     <PackageId>CraveInjectables.SqlDataService</PackageId>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cravecode/CraveInjectables.SqlDataService</RepositoryUrl>

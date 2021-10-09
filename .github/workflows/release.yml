@@ -16,7 +16,7 @@ jobs:
     - name: Test
       run: dotnet test --configuration Release /p:Version=${VERSION} --no-build
     - name: Pack
-      run: dotnet pack ./CraveInjectables.SqlDataService/CraveInjectables.SqlDataService.csproj --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -p:Version=${VERSION} --output .
+      run: pwd && dotnet pack ./CraveInjectables.SqlDataService/CraveInjectables.SqlDataService.csproj --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -p:Version=${VERSION} --output .
     - name: Push
       run: dotnet nuget push CraveInjectables.SqlDataService.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${Nuget_Token}
       env:

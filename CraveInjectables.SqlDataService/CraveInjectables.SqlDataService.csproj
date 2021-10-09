@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CraveInjectables.SqlDataService.Mocks\CraveInjectables.SqlDataService.Mocks.csproj" PrivateAssets="All" />
-    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <!-- BEGIN: Custom config to group projects into one nuget package.  -->

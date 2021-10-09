@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Brian Young @Cravecode</Authors>
+    <Authors>@Cravecode</Authors>
     <PackageId>CraveInjectables.SqlDataService</PackageId>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cravecode/CraveInjectables.SqlDataService</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CraveInjectables.SqlDataService.Mocks\CraveInjectables.SqlDataService.Mocks.csproj" />
+    <ProjectReference Include="..\CraveInjectables.SqlDataService.Mocks\CraveInjectables.SqlDataService.Mocks.csproj" PrivateAssets="All" />
+    <None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+
+  <!-- BEGIN: Custom config to group projects into one nuget package.  -->
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <ItemGroup>
+      <!-- Filter out unnecessary files -->
+      <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('PrivateAssets', 'All'))"/>
+    </ItemGroup>
+
+    <!-- Print batches for debug purposes -->
+    <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''" />
+
+    <ItemGroup>
+      <!-- Add file to package with consideration of sub folder. If empty, the root folder is chosen. -->
+      <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+    </ItemGroup>
+  </Target>
+  <!-- END: Custom config to group projects into one nuget package.  -->
 
 </Project>

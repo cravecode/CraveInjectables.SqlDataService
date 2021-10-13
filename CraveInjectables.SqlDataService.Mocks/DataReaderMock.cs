@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace CraveInjectables.SqlDataService.Mocks
 {
-    public class DataReaderMock<TObject> : IDataReader
+    public class DataReaderMock<TObject> : IDataReader, IDataReaderMock<TObject>
     {
         #region Members
 
